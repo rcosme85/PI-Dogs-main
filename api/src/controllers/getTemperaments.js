@@ -3,8 +3,10 @@ const URL = "https://api.thedogapi.com/v1/breeds";
 const { Temperaments } = require("../db")
 
 const getTemperaments = async(req, res) => {
-      const arrAllTempe = [];
-      const temperaments = (await axios.get(URL)).data;
+  const arrAllTempe = [];
+  const temperaments = (await axios.get(URL)).data;
+  //res.send(temperaments)
+ // return temperaments
       if (temperaments) {
         temperaments.forEach((elem) => {
           if (elem.temperament) {
@@ -22,7 +24,8 @@ const getTemperaments = async(req, res) => {
             });
           }
         });
-
+        
+        //return arrAllTempe
         //Crear los registros en Temperaments
          if (arrAllTempe.length) {
           for (tempe of arrAllTempe) {
