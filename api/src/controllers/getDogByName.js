@@ -1,23 +1,43 @@
 const { Dogs } = require("../db");
 const {Temperaments} = require("../db")
 const axios = require("axios");
-const url = "https://api.thedogapi.com/v1/breeds/search?q=";
+//const url = "https://api.thedogapi.com/v1/breeds/search?q=";
+const url = "https://api.thedogapi.com/v1/breeds/";
 const { Op } = require("sequelize");
-//const formatApi = require("../utils/formatApi")
-//const formatApiUno = require("../utils/formatApi");
+const { formatApi, formatBd } = require("../utils/formatApi");
 
 const getDogByName = async (name) => {
 
-    const dogsBD = await Dogs.findAll({
+    const dogsBdIni = await Dogs.findAll({
       where: {
         Nombre: {
           [Op.iLike]: `%${name}%`,
         },
       },
-      include: [{ model: Temperaments, attributes: ["Id", "Nombre"] }],
+      include: [
+        {
+          model: Temperaments,
+          attributes: ["Id", "Nombre"],
+          through: { attributes: [] },
+        },
+      ],
+      
     }); 
-  const dogsApi = (await axios(`${url}${name}`)).data;
+  const dogsBd = formatBd(dogsBdIni);
+ // const dogsApiIni = (await axios(`${url}${name}`)).data;
+  const dogsApiIni = (await axios.get(url)).data;
+  
+  //Buscar por Nombre en la Api
+  let dogsApiArr = [];
+  for (let dog of dogsApiIni) {
+    const nameDog = dog.name;
+    if (nameDog.includes(name)) {
+      dogsApiArr.push(dog);
+      
+    }
+  }
+  const dogsApi = formatApi(dogsApiArr);
 
-  return [...dogsBD, ...dogsApi];
+  return [...dogsBd, ...dogsApi]; 
 }
 module.exports = getDogByName;

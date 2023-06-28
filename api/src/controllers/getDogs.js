@@ -1,15 +1,26 @@
 const { Dogs } = require("../db");
 const axios = require("axios");
 const URL = "https://api.thedogapi.com/v1/breeds";
-const formatApi = require("../utils/formatApi")
+const { formatApi, formatBd } = require("../utils/formatApi");
+const { Temperaments } = require("../db");
 
 const getDogs = async () => {
   
-    const dataBaseDogs = await Dogs.findAll();
-    const dogsApiIni = (await axios.get(`${URL}`)).data;
+  const dogsBdIni = await Dogs.findAll({
+    include: [
+      {
+        model: Temperaments,
+        attributes: ["Id", "Nombre"],
+        through: { attributes: [] },
+      },
+    ],
+  });
+  const dogsBd = formatBd(dogsBdIni)
   
-    const dogsApi = formatApi(dogsApiIni)
-    return [...dataBaseDogs, ...dogsApi];
+  const dogsApiIni = (await axios.get(`${URL}`)).data;
+  const dogsApi = formatApi(dogsApiIni)
+  
+  return [...dogsBd, ...dogsApi];
 };
 
 module.exports = getDogs;

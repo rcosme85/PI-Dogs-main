@@ -1,34 +1,47 @@
 const formatApi = (arr) => {
-  const arrDogs = [];
-  for (elem of arr) {
-   // return elem
-    const dog = {
+  const dogsFormat = arr?.map((elem) => {
+    return {
       id: elem.id,
-      imagen: elem.image.url,
+      image: elem.image.url,
       name: elem.name,
-      altura: elem.height.metric,
-      peso: elem.weight.metric,
+      height: elem.height.metric,
+      weight: elem.weight.metric,
       life_span: elem.life_span,
-      temperament: elem.temperament,
+      Temperament: elem.temperament,
+
       created: false,
     };
-    arrDogs.push(dog);
-  }
-  return arrDogs;
+    
+  })
+  return dogsFormat;
+}
+
+const formatBd = (arr) => {
+
+  const dogsFormatBd = arr?.map((elem) => {
+    return {
+      id: elem.id,
+      image: elem.Imagen,
+      name: elem.Nombre,
+      height: elem.Altura,
+      weight: elem.Peso,
+      life_span: elem.Anos_vida,
+      Temperament: formatTemperament(elem.Temperaments),
+      created: elem.created,
+    };
+  });
+  return dogsFormatBd;
 };
 
-const formatApiUno = (arr) => {
-  const arrDogs = [];
-  const dog = {
-    id: elem.id,
-    imagen: elem.image.url,
-    name: elem.name,
-    altura: elem.height.metric,
-    peso: elem.weight.metric,
-    life_span: elem.life_span,
-    temperament: elem.temperament,
-    created: false,
-  };
-  arrDogs.push(dog);
+const formatTemperament = (arrTempe) => {
+  if (arrTempe.length) {
+    const newArrTempe = [];
+    for (tempe of arrTempe) {
+      newArrTempe.push(tempe.Nombre);
+    }
+    return newArrTempe.join(", ");
+  }
+  return("-")
 }
-module.exports = formatApi, formatApiUno
+
+module.exports = {formatApi, formatBd}

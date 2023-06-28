@@ -7,16 +7,18 @@ const CardsContainer = () => {
   
   return (
     <div className={styles.container}>
-      {dogs.map((dog) => {
-        return <Card
-          id={dog.id}
-          name={dog.name}
-          //temperament={dog.temperament}
-          altura={dog.altura}
-          peso={dog.peso}
-          image={dog.imagen}
-          life_span = {dog.life_span}
-        />
+      {dogs?.map((dog) => {
+        return (
+          <Card
+            id={dog.id}
+            name={dog.name}
+            temperament={dog.temperament}
+            altura={dog.height.metric}
+            peso={dog.weight.metric}
+            life_span={dog.life_span}
+            image={dog.image?.url}
+          />
+        );
       })}
     </div>
   )

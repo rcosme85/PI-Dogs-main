@@ -7,48 +7,44 @@ const {
 } = require("../controllers/postDogs");
 const getDogById = require("../controllers/getDogById");
 
+//("Ruta para traer a todos los perros o Por Nombre")
 const getDogsHandler = async (req, res) => {
-  //res.send("Ruta para traer a todos los perros o Por Nombre");
   try {
     const { name } = req.query;
 
     const result = name ? await getDogByName(name) : await getDogs();
-    result
+    result.length
         ? res.status(200).json(result)
-        : res.status(404).send("No hay registros de Dogs");
+        : res.status(404).send("No hay registros de Dogs con Nombre: " + name);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
-
+//("Ruta para traer a los perros por ID");
 const getDogHandler = async (req, res) => {
-  //res.send("Ruta para traer a los perros por ID");
   try {
     const { id } = req.params;
     const source = isNaN(id) ? "BD" : "api"
     const dog = await getDogById(id, source)
-    dog
+    dog.length
       ? res.status(200).json(dog)
       : res.status(404).send("No hay registros de Dogs con el ID: " + id);
   } catch (error) {
      return res.status(500).json({ error: error.message });
   }
 };
-
+//("Ruta para crear a un nuevo perro")
 const createDogsHandler = async (req, res) => {
-  //res.send("Ruta para crear a un nuevo perro");
   try {
     const { Imagen, Nombre, Altura, Peso, Anos_vida, TemperamentId } = req.body;
-    //Validar que llegue todos los datos
-    if (!Imagen || !Nombre || !Altura || !Peso || !Anos_vida)
-      return res.status(402).send("Faltan Datos");
+    
     //Validar si TemperamentId es un array con los códigos de Temperamentos
     if (!TemperamentId.length) return res.status(402)
         .send(
           "TemperamentId: debe ser un array con los códigos de Temperamentos"
     );
     //Validar si el Nombre es repetido
-    const nameDogRepetido = await dogsNombreFind(Nombre)
+     const nameDogRepetido = await dogsNombreFind(Nombre)
     if (nameDogRepetido) return res.status(402).send("El nombre es repetido");
     
     //Validar si existen los Id de Temperamentos
@@ -62,7 +58,6 @@ const createDogsHandler = async (req, res) => {
       Peso,
       Anos_vida,
       TemperamentId,
-      ArrtemperamentsId
     );
     newDog.id
       ? res.status(200).json(newDog)

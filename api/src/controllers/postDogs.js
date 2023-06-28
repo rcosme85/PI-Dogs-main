@@ -1,23 +1,14 @@
 const { Dogs } = require("../db")
 const { Temperaments } = require("../db");
- 
-const postDogs = async (Imagen, Nombre, Altura, Peso,
-  Anos_vida, ArrtemperamentsId) => {
-  
-    const newDog = await Dogs.create({
-      Imagen, Nombre, Altura, Peso, Anos_vida,
-    });
 
-    // Crea registros de la tabla relacional (muchos a muchos)
-    for (tempe of ArrtemperamentsId) {
-      await newDog.addTemperaments(tempe);
-    }
-    //res.status(201).json(newDog);
-    return newDog;
+//Validar si el Nombre es repetido
+const dogsNombreFind = async (Nombre) => {
+  const nameDog = await Dogs.findOne({ where: { Nombre: `${Nombre}` } });
+  return nameDog;
 };
 
+ //Validar si existen los Id de temperamentos
 const temperamentsFind = async (TemperamentId) => {
-  //Validar si existen los Id de temperamentos
  let arrTemperaments = [];
   for (let i = 0; i < TemperamentId.length; i++) {
     const newTempe = await Temperaments.findByPk(parseInt(TemperamentId[i]));
@@ -27,11 +18,27 @@ const temperamentsFind = async (TemperamentId) => {
   }
   return arrTemperaments
 };
-const dogsNombreFind = async(Nombre) => {
-  //Validar si el Nombre es repetido
-  const nameDog = await Dogs.findOne({ where: { Nombre: `${Nombre}` } });
-  return nameDog
-  
-}
+
+// Crea un nuevo Dog
+const postDogs = async (
+  Imagen,
+  Nombre,
+  Altura,
+  Peso,
+  Anos_vida,
+  TemperamentId,
+) => {
+  const newDog = await Dogs.create({
+    Imagen,
+    Nombre,
+    Altura,
+    Peso,
+    Anos_vida,
+  });
+
+  // Crea registros de la tabla relacional (muchos a muchos)
+   await newDog.addTemperaments(TemperamentId)
+  return newDog;
+};
 
 module.exports = { postDogs, dogsNombreFind, temperamentsFind };
