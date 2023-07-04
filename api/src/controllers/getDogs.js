@@ -17,6 +17,7 @@ const getDogs = async () => {
   });
   const dogsBd = formatBd(dogsBdIni)
   
+  //const dogsApiIni = (await axios.get(`${URL}?api_key=${API_KEY}`)).data;
   const dogsApiIni = (await axios.get(`${URL}`)).data;
   const dogsApi = formatApi(dogsApiIni)
   

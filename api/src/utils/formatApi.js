@@ -1,5 +1,7 @@
 const formatApi = (arr) => {
   const dogsFormat = arr?.map((elem) => {
+    //let weightArr = elem.weight.metric.split("-")
+    //weightIni: parseInt(weightArr[0]);
     return {
       id: elem.id,
       image: elem.image.url,
@@ -8,7 +10,6 @@ const formatApi = (arr) => {
       weight: elem.weight.metric,
       life_span: elem.life_span,
       Temperament: elem.temperament,
-
       created: false,
     };
     
@@ -44,4 +45,31 @@ const formatTemperament = (arrTempe) => {
   return("-")
 }
 
-module.exports = {formatApi, formatBd}
+const formatDogId_BD = (dog) => {
+  let objDog = {
+    id: dog.id,
+    image: dog.Imagen,
+    name: dog.Nombre,
+    height: dog.Altura,
+    weight: dog.Peso,
+    life_span: dog.Anos_vida,
+    Temperament: formatTemperament(dog.Temperaments),
+    created: dog.created,
+  };
+  return objDog
+}
+
+const formatDogId_Api = (dog) => {
+  let objDog = {
+    id: dog.id,
+    image: dog.image.url,
+    name: dog.name,
+    height: dog.height.metric,
+    weight: dog.weight.metric,
+    life_span: dog.life_span,
+    Temperament: dog.temperament,
+    created: false,
+  };
+  return objDog;
+};
+module.exports = { formatApi, formatBd, formatDogId_BD, formatDogId_Api };

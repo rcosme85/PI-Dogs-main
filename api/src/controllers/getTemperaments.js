@@ -1,5 +1,6 @@
 const axios = require("axios");
 const URL = "https://api.thedogapi.com/v1/breeds";
+//const URL_TEMP = 
 const { Temperaments } = require("../db")
 
 const getTemperaments = async(req, res) => {
@@ -27,14 +28,29 @@ const getTemperaments = async(req, res) => {
         
         //return arrAllTempe
         //Crear los registros en Temperaments
-         if (arrAllTempe.length) {
-          for (tempe of arrAllTempe) {
+        if (arrAllTempe.length) {
+           const tempeSort = arrAllTempe.sort((a, b) => {
+             //const weightArr = a.weight.split("-");
+             if (a < b) return -1;
+             if (a > b) return 1;
+
+             return 0;
+           });
+          //return arrAllTempe
+          for (tempe of tempeSort) {
             const Nombre = tempe.trim();
             await Temperaments.findOrCreate({ where: { Nombre: `${Nombre}` } });
           }
         } 
-        return arrAllTempe
-      }
+
+        //get de temperaments de la BD
+        //const temperaments=[]
+        
+       // return arrAllTempe
+        const temperamentsAll = await Temperaments.findAll();
+        return temperamentsAll;
+  }
+  
 }
 module.exports = getTemperaments
 

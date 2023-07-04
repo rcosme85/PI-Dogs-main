@@ -1,0 +1,12 @@
+.container h3 {
+    color: white;
+    background: rgba(128, 128, 128, .85);
+}
+
+.default {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+  }

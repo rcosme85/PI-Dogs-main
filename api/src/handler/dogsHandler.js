@@ -13,9 +13,11 @@ const getDogsHandler = async (req, res) => {
     const { name } = req.query;
 
     const result = name ? await getDogByName(name) : await getDogs();
-    result.length
-        ? res.status(200).json(result)
-        : res.status(404).send("No hay registros de Dogs con Nombre: " + name);
+
+    res.status(200).json(result);
+    
+     // return sinRegistro
+       // : res.status(404).send("No hay registros de Dogs con Nombre: " + name);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -26,9 +28,10 @@ const getDogHandler = async (req, res) => {
     const { id } = req.params;
     const source = isNaN(id) ? "BD" : "api"
     const dog = await getDogById(id, source)
-    dog.length
+    res.status(200).json(dog);
+    /* dog.length
       ? res.status(200).json(dog)
-      : res.status(404).send("No hay registros de Dogs con el ID: " + id);
+      : res.status(404).send("No hay registros de Dogs con el ID: " + id); */
   } catch (error) {
      return res.status(500).json({ error: error.message });
   }
@@ -59,9 +62,10 @@ const createDogsHandler = async (req, res) => {
       Anos_vida,
       TemperamentId,
     );
-    newDog.id
+    res.status(200).json(newDog);
+    /* newDog.id
       ? res.status(200).json(newDog)
-      : res.status(404).send("No hay datos para registrar un Dog");
+      : res.status(404).send("No hay datos para registrar un Dog"); */
 
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -1,19 +1,29 @@
 import CardsContainer from "../../components/CardsContainer/CardsContainer"
-import { useEffect } from "react"
+import Default from "../../components/Default/Default";
+import { useEffect } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux"
-import { getDogs } from "../../redux/action";
+import { getAllDogs } from "../../redux/action";
 
 const Home = () => {
   const dispatch = useDispatch();
-
+  const dogs = useSelector((state) => state.dogs);
+ // const dogsCopy = useSelector((state) => state.dogsCopy);
+  
   useEffect(() => {
-    dispatch(getDogs())
-  },[dispatch])
+   dispatch(getAllDogs());
+    //dispatch(getDogByName());
+    
+  },[])
 
   return (
     <div>
+      {/* <NavBar handleChange={handleChange} handleOnClick={handleOnClick } /> */}
       <h3>List of Dogs</h3>
-      <CardsContainer/>
+      { dogs.length
+        ? < CardsContainer dogs={dogs} />
+        : <Default />
+      }
     </div>
   )
 }

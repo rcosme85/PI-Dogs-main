@@ -20,7 +20,9 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
-// Syncing all the models at once.
+// Syncing all the models at once.//alter:true
+//force:true
+
 conn.sync({ alter: true })
   .then(() => {
   server.listen(3001, () => {

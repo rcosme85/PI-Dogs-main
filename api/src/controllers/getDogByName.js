@@ -28,14 +28,18 @@ const getDogByName = async (name) => {
   const dogsApiIni = (await axios.get(url)).data;
   
   //Buscar por Nombre en la Api
-  let dogsApiArr = [];
+  /* let dogsApiArr = [];
   for (let dog of dogsApiIni) {
     const nameDog = dog.name;
     if (nameDog.includes(name)) {
       dogsApiArr.push(dog);
       
     }
-  }
+  } */
+  const dogsApiArr = dogsApiIni.filter((dog) =>
+    dog.name.toLowerCase().includes(name.toLowerCase())
+  );
+  
   const dogsApi = formatApi(dogsApiArr);
 
   return [...dogsBd, ...dogsApi]; 

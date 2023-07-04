@@ -11,12 +11,13 @@ function App() {
    const location = useLocation();
   return (
     <div className="App">
-      {location.pathname !== "/" ? <NavBar/> : null}
+       {location.pathname !== "/" ? <NavBar /> : null}
+      {/* <Route path="*" component={Navbar} /> */}
       <hr />
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/create" element={<Form />} />
       </Routes>
     </div>

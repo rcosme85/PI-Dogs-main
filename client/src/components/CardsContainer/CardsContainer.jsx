@@ -1,27 +1,59 @@
 import styles from "./CardsContainer.module.css";
 import Card from "../Card/Card"
-import { useSelector } from "react-redux/es/hooks/useSelector";
 
-const CardsContainer = () => {
-  const dogs = useSelector(state=>state.dogs)
-  
+
+const CardsContainer = ({ dogs }) => {
+   
+   if (!Array.isArray(dogs)) {
+     dogs = [dogs];
+  }
+  //const dogsList = dogs
+   return (
+     <div className={styles.container}>
+       {dogs?.map((dog) => {
+         return (
+           <Card
+             key={dog.id}
+            id={dog.id}
+             name={dog.name}
+             temperament={dog.Temperament}
+             height={dog.height}
+             weight={dog.weight}
+             life_span={dog.life_span}
+             image={dog.image}
+           />
+         );
+       })}
+     </div>
+   );
+ };
+
+export default CardsContainer
+
+
+
+/* const CardsContainer = () => {
+  let dogs = useSelector(state=>state.dogs)
+   if (!Array.isArray(dogs)) {
+    dogs = [dogs]
+  } 
   return (
     <div className={styles.container}>
+      
       {dogs?.map((dog) => {
         return (
           <Card
+            key={dog.id}
             id={dog.id}
             name={dog.name}
-            temperament={dog.temperament}
-            altura={dog.height.metric}
-            peso={dog.weight.metric}
+            //temperament={dog.temperament}
+            //height={dog.height}
+           // weight={dog.weight}
             life_span={dog.life_span}
-            image={dog.image?.url}
+            //image={dog.image.url}
           />
         );
       })}
     </div>
   )
-}
-
-export default CardsContainer
+} */
