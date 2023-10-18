@@ -1,28 +1,58 @@
 .container{
-  width: 100vw;
-  background-color:rgba(128, 128, 128, .80);
-  height: 100vh;
   display: flex;
-  border: 1px solid black;
-  border-radius: 15px;
-   /* justify-content: space-around;  */
+  flex-direction: column;
   align-items: center;
- 
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+  border: 3px solid black;
+  border-radius: 15px;
+ background-image: url(https://images6.alphacoders.com/678/678636.jpg);
+  background-size: cover;
   
 }
 
-.container button {
+.containerTitulo{
+  margin-top: 40px;
+  text-align: center;
+  /* height: 200%; */
+  /* width: 100%;  */
+  
+
+}
+.titulo{
+font-size: 40px;
+background-color:rgba(163, 161, 161, 0.5);
+width: 80%;
+height: 100px;
+color: rgb(11, 11, 11);
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: flex-end; /* Alineación a la derecha */
+  align-items: flex-end;
+  margin: 100px;
+  /*Ancho del contenedor del botón */
+  width: 80%; 
+  /* background-color:white */
+}
+
+.button {
     border-radius: 3px;
-    height: 35px;
-    width: 70px;
-     margin-left: 10px;
-     margin-right: 10px; 
+    height:70px;
+    width: 150px;
+    font-size: 20px;
     color: whitesmoke;
     background-color: darkslategray;
     box-shadow: 0 5px 5px black;
     &:hover {
-        color: darkslategray;
-        background-color: whitesmoke;
-        box-shadow: 0 5px 5px white;
+        color: rgb(4, 21, 21);
+        background-color: rgb(82, 143, 114);
+        box-shadow: 0 5px 5px darkslategray;
     }
 }

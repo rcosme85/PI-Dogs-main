@@ -7,7 +7,7 @@ const { formatApi, formatDogId_BD, formatDogId_Api } = require("../utils/formatA
 const getDogById = async (id, source) => {
   if (source === "api") {
     //Traigo toda la Api
-    const dogApiIni = (await axios.get(URL)).data;
+    const dogApiIni = (await axios.get(`${URL}?api_key={API_KEY}`)).data;
     let dogApiFind = dogApiIni.find(elem => elem.id === +id)
     if (dogApiFind) {
 

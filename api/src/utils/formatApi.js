@@ -4,7 +4,7 @@ const formatApi = (arr) => {
     //weightIni: parseInt(weightArr[0]);
     return {
       id: elem.id,
-      image: elem.image.url,
+      image: elem.image?.url,
       name: elem.name,
       height: elem.height.metric,
       weight: elem.weight.metric,

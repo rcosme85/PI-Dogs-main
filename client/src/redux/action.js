@@ -1,5 +1,5 @@
 import axios from "axios";
-//export const GET_DOGS = "GET_DOGS"
+export const GET_DOGS = "GET_DOGS"
 export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const GET_DOGS_NAME = "GET_DOGS_NAME"
 export const GET_DOGS_ID = "GET_DOGS_ID";
@@ -8,6 +8,7 @@ export const ORDER_ORIGEN = "ORDER_ORIGEN";
 export const ORDER_AZ = "ORDER_AZ";
 export const ORDER_WEIGHT = "ORDER_WEIGHT";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
+//export const POST_DOG = "POST_DOG";
 //const URL = "https://api.thedogapi.com/v1/breeds";
 const URL_ALL = "http://localhost:3001/dogs/";
 const URL_NAME = "http://localhost:3001/dogs/?name=";
@@ -35,7 +36,7 @@ const URL_NAME = "http://localhost:3001/dogs/?name=";
     }
   }
 }
-export const getDogsByTemperaments = (tempeFind) => {
+ export const getDogsByTemperaments = (tempeFind) => {
   return async function (dispatch) {
     try {
       const dogsTempe = (await axios.get(URL_ALL)).data
@@ -45,7 +46,6 @@ export const getDogsByTemperaments = (tempeFind) => {
           dogsFind.push(tempe);
         }
       }
-      console.log(dogsFind)
       return dispatch({
         type: GET_DOGS_TEMPERAMENTS,
         payload: dogsFind,
@@ -54,7 +54,7 @@ export const getDogsByTemperaments = (tempeFind) => {
        throw Error(error.message);
     }
   }
-}
+} 
 export const getDogByName = (name) => {
   return async function (dispatch) {
     try {
@@ -82,15 +82,22 @@ export const getDogById = (id) => {
     }
   };
 };
+/* export const postDog = (bodyDog) => {
+  return async function (dispatch) {
+    try {
+      const postDog = (await axios.post(URL_ALL, bodyDog)).data;
+      return dispatch({ type: POST_DOG, payload: postDog });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}; */
 
 export const getTemperaments = (id) => {
   return async function (dispatch) {
     try {
-      //const name = "Aff"
       const temperaments = (await axios.get("http://localhost:3001/temperaments/"))
         .data;
-
-      //console.log(dogsById)
       return dispatch({ type: GET_TEMPERAMENTS, payload: temperaments });
     } catch (error) {
       throw Error(error.message);

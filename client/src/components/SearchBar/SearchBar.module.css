@@ -2,7 +2,11 @@
     padding-top: 20px;
     padding-bottom: 15px;
     margin: auto;
-   ;
+    border: 2px solid rgb(16, 17, 17); 
+   border-radius: 15px; 
+    background-color: rgb(122, 122, 113);
+    align-content: end
+    ;
 }
 
 .container input {

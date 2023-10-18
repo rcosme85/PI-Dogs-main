@@ -5,7 +5,7 @@ const { Temperaments } = require("../db")
 
 const getTemperaments = async(req, res) => {
   const arrAllTempe = [];
-  const temperaments = (await axios.get(URL)).data;
+  const temperaments = (await axios.get(`${URL}?api_key={API_KEY}`)).data;
   //res.send(temperaments)
  // return temperaments
       if (temperaments) {
@@ -26,11 +26,9 @@ const getTemperaments = async(req, res) => {
           }
         });
         
-        //return arrAllTempe
         //Crear los registros en Temperaments
         if (arrAllTempe.length) {
            const tempeSort = arrAllTempe.sort((a, b) => {
-             //const weightArr = a.weight.split("-");
              if (a < b) return -1;
              if (a > b) return 1;
 

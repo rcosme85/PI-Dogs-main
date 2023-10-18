@@ -41,7 +41,7 @@ const NavBar = () => {
   };
 
   const handleFind_ByTemperaments = (event) => {
-    ////falta code
+   ////falta code
     var selectDogs = document.getElementById("Dogs");
     selectDogs.value = "Dogs";
     var selectOrder = document.getElementById("ORDER");
@@ -50,6 +50,7 @@ const NavBar = () => {
     selectWeight.value = "WEIGHT";
 
     if (event.target.value !== "Temperaments") {
+
       dispatch(getDogsByTemperaments(event.target.value));
       setAux(!aux);
     }
@@ -68,15 +69,20 @@ const NavBar = () => {
        
         </button>
       </NavLink> */}
-      <button
-        className={styles.container.button}
-        onClick={() => navigate("/home")}
-      >
-        Home
-      </button>
-      <div>
+      <div className={styles.container.button}>
+        <NavLink to="/">
+          <button>Landing</button>
+        </NavLink>
+        <NavLink to="/create">
+          <button>Form</button>
+        </NavLink>
+      </div>
+
+      <div className={styles.option.container}>
         <select name="Dogs" id="Dogs" onChange={handleOrigen}>
-          <option value="Dogs">Dogs</option>
+          <option  value="Dogs">
+            Dogs
+          </option>
           <option value="All">All</option>
           <option value="Existing">Existing-Api</option>
           <option value="Created">Created</option>
@@ -104,17 +110,10 @@ const NavBar = () => {
             );
           })}
         </select>
+      </div>
 
-        <NavLink to="/create">
-          <button>Form</button>
-        </NavLink>
-
-        <NavLink to="/">
-          <button>Landing</button>
-        </NavLink>
-        <div>
-          <SearchBar />
-        </div>
+      <div className={styles.container.input}>
+        <SearchBar />
       </div>
     </div>
   );

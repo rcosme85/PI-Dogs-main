@@ -16,8 +16,6 @@ const getDogsHandler = async (req, res) => {
 
     res.status(200).json(result);
     
-     // return sinRegistro
-       // : res.status(404).send("No hay registros de Dogs con Nombre: " + name);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

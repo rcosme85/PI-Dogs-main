@@ -5,19 +5,29 @@ const initialState = {
   dogs: [],
   dog:{},
   dogsCopy: [],
+  //dogP:[],
+  dogsFiltered:[],
+  filter:false,
   temperaments: []
   
 }
 export default function reducer(state = initialState, { type, payload }) {
+  //const ITEMS_PER_PAGE = 8;
   switch (type) {
-    /* case GET_DOGS:
-      return { ...state, dogs: payload, dogsCopy: payload }; */
+     //case GET_DOGS:
+    //  return { ...state, filter: true, dogsFiltered: payload }; 
 
     case GET_ALL_DOGS:
-      return { ...state, dogs: payload, dogsCopy: payload };
+      return {
+        ...state,
+        dogs: payload,
+        dogsCopy: payload,
+        //dogP: [...payload].splice(0, ITEMS_PER_PAGE),
+      };
 
     case GET_DOGS_NAME:
-      return { ...state, dogs: payload };
+      return { ...state, filter:true, dogsFiltered: payload };
+      //return { ...state, filter:true, dogs: payload };
 
     case GET_DOGS_ID:
       return { ...state, dog: payload };
@@ -26,7 +36,9 @@ export default function reducer(state = initialState, { type, payload }) {
       return { ...state, temperaments: payload };
     
     case GET_DOGS_TEMPERAMENTS:
-      return { ...state, dogs: payload };
+      return { ...state, filter: true, dogsFiltered: payload };
+    // case POST_DOG:
+    //   return { ...state, dogs: payload };
     
     case ORDER_ORIGEN:
       let orderedOrigen = [];
@@ -41,7 +53,7 @@ export default function reducer(state = initialState, { type, payload }) {
         orderedOrigen = dogsFilter.filter((dog) => dog.created === true);
       }
 
-      return { ...state, dogs: orderedOrigen };
+      return { ...state, filter:true, dogsFiltered: orderedOrigen };
 
     case ORDER_AZ:
       let orderedDogs = [];
@@ -63,7 +75,8 @@ export default function reducer(state = initialState, { type, payload }) {
       }
       return {
         ...state,
-        dogs: orderedDogs,
+        filter: true,
+        dogsFiltered: orderedDogs,
       };
 
     case ORDER_WEIGHT:
@@ -85,10 +98,11 @@ export default function reducer(state = initialState, { type, payload }) {
           return 0;
         });
       }
-      console.log(orderedWeight);
+      //console.log(orderedWeight);
       return {
         ...state,
-        dogs: orderedWeight,
+        filter: true,
+        dogsFiltered: orderedWeight,
       };
     default:
       return { ...state };

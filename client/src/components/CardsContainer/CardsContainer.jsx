@@ -10,11 +10,12 @@ const CardsContainer = ({ dogs }) => {
   //const dogsList = dogs
    return (
      <div className={styles.container}>
+      
        {dogs?.map((dog) => {
          return (
            <Card
              key={dog.id}
-            id={dog.id}
+             id={dog.id}
              name={dog.name}
              temperament={dog.Temperament}
              height={dog.height}
