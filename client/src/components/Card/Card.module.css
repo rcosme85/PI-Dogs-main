@@ -6,7 +6,12 @@
     /* background-color: darkgray; */
      /* background-color: rgb(220, 185, 68); */
     /* background-color: #7DA3A1; */
-    background-color: rgb(220, 185, 68);
+
+    /* Color: Naranja */
+    /* background-color: rgb(220, 185, 68); */
+    background-color: rgb(251, 206, 58);
+    /* background-color: #00866E; */
+    /* background-color: #42c1c8; */
     border-radius: 10px;
     width: 175px;
     height: 350px;
@@ -45,11 +50,15 @@
 .dataContainer h2 {
     margin: 2px;
     font-size: 18px;
-    color: #152125
+    /* color: #152125; */
+     color: #000000;
+     /* text-decoration: none; */
+     
 }
 
 .dataContainer h4 {
     margin: 2px;
     font-size: 12px;
-    color: rgb(31, 56, 56)
+    /* color: rgb(31, 56, 56); */
+    color:#000000
 }

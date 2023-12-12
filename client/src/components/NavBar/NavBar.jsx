@@ -69,7 +69,8 @@ const NavBar = () => {
        
         </button>
       </NavLink> */}
-      <div className={styles.container.button}>
+      {/* styles.container.button */}
+      <div className={styles.containerButton}>
         <NavLink to="/">
           <button>Landing</button>
         </NavLink>
@@ -78,11 +79,9 @@ const NavBar = () => {
         </NavLink>
       </div>
 
-      <div className={styles.optionContainer}>
+      <div className={styles.selectContainer}>
         <select name="Dogs" id="Dogs" onChange={handleOrigen}>
-          <option  value="Dogs">
-            Dogs
-          </option>
+          <option value="Dogs">Dogs</option>
           <option value="All">All</option>
           <option value="Existing">Existing-Api</option>
           <option value="Created">Created</option>
@@ -112,7 +111,7 @@ const NavBar = () => {
         </select>
       </div>
 
-      <div className={styles.container.input}>
+      <div className={styles.containerSearch}>
         <SearchBar />
       </div>
     </div>
