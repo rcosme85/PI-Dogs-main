@@ -78,7 +78,7 @@ const NavBar = () => {
         </NavLink>
       </div>
 
-      <div className={styles.option.container}>
+      <div className={styles.optionContainer}>
         <select name="Dogs" id="Dogs" onChange={handleOrigen}>
           <option  value="Dogs">
             Dogs

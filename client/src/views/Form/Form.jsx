@@ -97,10 +97,10 @@ const Form = () => {
     //console.log(errors);
     const rptaError = Object.entries(errors).length !== 0
     if (rptaError) return alert("There are errors, a Dog cannot be created");
-    console.log("Antes del if")
-    console.log(tempeChecked);
+    //console.log("Antes del if")
+    //console.log(tempeChecked);
     const rpta = tempeChecked.length
-    console.log(rpta)
+    //console.log(rpta)
     if (tempeChecked.lengt === 0)
       return alert("Missing temperament");
     

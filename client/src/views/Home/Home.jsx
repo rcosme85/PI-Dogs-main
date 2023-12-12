@@ -17,9 +17,9 @@ const Home = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
  
-console.log("filter")
-  console.log(filter)
-  console.log(dogsFiltered)
+//console.log("filter")
+ // console.log(filter)
+ // console.log(dogsFiltered)
  // const [datosDogs, setDatosDogs] = useState(dogs);
   const [items, setItems] = useState([])
   const [itemFiltered, setItemFiltereds] = useState([]);
